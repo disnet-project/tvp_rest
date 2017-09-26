@@ -1,8 +1,8 @@
 package edu.upm.midas.controller;
+import edu.upm.midas.authorization.token.service.TokenAuthorization;
 import edu.upm.midas.model.MatchNLP;
 import edu.upm.midas.model.Request;
 import edu.upm.midas.model.Response;
-import edu.upm.midas.service.TokenAuthorization;
 import edu.upm.midas.service.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.Device;
@@ -37,8 +37,10 @@ public class ValidationController {
             method = RequestMethod.POST)
     public Response filter(@RequestBody @Valid Request request, HttpServletRequest httpRequest, Device device) throws Exception {
         Response response = tokenAuthorization.validateService(request.getToken(), request.getConcepts(), httpRequest.getServletPath(), device);
-        List<MatchNLP> conceptsValidated = validationService.doValidation( request.getConcepts() );
-        response.setValidatedConcepts( conceptsValidated );
+        if (response.isAuthorization()) {
+            List<MatchNLP> conceptsValidated = validationService.doValidation(request.getConcepts());
+            response.setValidatedConcepts(conceptsValidated);
+        }
 
         return response;
     }

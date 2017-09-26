@@ -1,4 +1,4 @@
-package edu.upm.midas.util_service;
+package edu.upm.midas.common.util;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;

@@ -1,4 +1,4 @@
-package edu.upm.midas.authorization.tvpApiResponse;
+package edu.upm.midas.authorization.service;
 
 import edu.upm.midas.authorization.model.ValidationResponse;
 

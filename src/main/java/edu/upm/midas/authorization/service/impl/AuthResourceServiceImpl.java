@@ -1,8 +1,8 @@
-package edu.upm.midas.authorization.tvpApiResponse.impl;
+package edu.upm.midas.authorization.service.impl;
 
 import edu.upm.midas.authorization.client.AuthClient;
 import edu.upm.midas.authorization.model.ValidationResponse;
-import edu.upm.midas.authorization.tvpApiResponse.AuthResourceService;
+import edu.upm.midas.authorization.service.AuthResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

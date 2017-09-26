@@ -24,6 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface AuthClient {
 
     @RequestMapping(value = "${my.service.authorization.path}", method = RequestMethod.POST)
-    public ValidationResponse validationServiceByToken(@RequestBody String tokenService);
+    ValidationResponse validationServiceByToken(@RequestBody String tokenService);
 
 }

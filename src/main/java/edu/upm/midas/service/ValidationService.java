@@ -2,21 +2,12 @@ package edu.upm.midas.service;
 
 import edu.upm.midas.constants.Constants;
 import edu.upm.midas.model.*;
-import edu.upm.midas.util_service.StaticUtils;
+import edu.upm.midas.common.util.StaticUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResourceLoader;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import sun.misc.IOUtils;
-import sun.nio.ch.IOUtil;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.AbstractStringMetric;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.Levenshtein;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 

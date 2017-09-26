@@ -1,4 +1,4 @@
-package edu.upm.midas.util_service;
+package edu.upm.midas.common.util;
 
 import java.io.File;
 import java.math.BigDecimal;

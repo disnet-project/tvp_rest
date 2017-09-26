@@ -1,6 +1,6 @@
-package edu.upm.midas.token.component;
+package edu.upm.midas.authorization.token.component;
 
-import edu.upm.midas.util_service.TimeProvider;
+import edu.upm.midas.common.util.TimeProvider;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
