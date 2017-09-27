@@ -39,8 +39,8 @@ public class TokenAuthorization {
         System.out.println( "Call Authorization API... " );
         ValidationResponse validationResponse = authResourceService.validationServiceByToken( token );
         response.setAuthorization( validationResponse.isAuthorized() );
-        response.setMessage( validationResponse.getMessage() );
-        response.setToken( token );
+        response.setAuthorizationMessage( validationResponse.getMessage() );
+        response.setToken( userToken );
 
         return response;
 

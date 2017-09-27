@@ -1,9 +1,5 @@
 package edu.upm.midas.model;
-import edu.upm.midas.constants.Constants;
-import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -19,7 +15,7 @@ public class Response {
 
     private String token;
     private boolean authorization;
-    private String message;
+    private String authorizationMessage;
     List<MatchNLP> validatedConcepts;
 
 
@@ -39,12 +35,12 @@ public class Response {
         this.authorization = authorization;
     }
 
-    public String getMessage() {
-        return message;
+    public String getAuthorizationMessage() {
+        return authorizationMessage;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setAuthorizationMessage(String authorizationMessage) {
+        this.authorizationMessage = authorizationMessage;
     }
 
     public List<MatchNLP> getValidatedConcepts() {
