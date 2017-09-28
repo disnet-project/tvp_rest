@@ -36,7 +36,7 @@ public class ValidationController {
     @RequestMapping(path = { "/concepts-validated" }, //Term Validation Procedure
             method = RequestMethod.POST)
     public Response filter(@RequestBody @Valid Request request, HttpServletRequest httpRequest, Device device) throws Exception {
-        Response response = tokenAuthorization.validateService(request.getToken(), request.getConcepts(), httpRequest.getServletPath(), device);
+        Response response = tokenAuthorization.validateService(request.getToken(), httpRequest.getServletPath(), httpRequest.getServletPath(), device);
         if (response.isAuthorization()) {
             List<MatchNLP> conceptsValidated = validationService.doValidation(request.getConcepts());
             response.setValidatedConcepts(conceptsValidated);

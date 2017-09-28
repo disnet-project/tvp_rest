@@ -31,10 +31,10 @@ public class TokenAuthorization {
     private AuthResourceService authResourceService;
 
 
-    public Response validateService(String userToken, List<Concept> conceptList, String path, Device device){
+    public Response validateService(String userToken, String request, String path, Device device){
         Response response = new Response();
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String token = jwtTokenUtil.generateToken( userToken, gson.toJson(conceptList), path, device );
+//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String token = jwtTokenUtil.generateToken( userToken, request, path, device );
 
         System.out.println( "Call Authorization API... " );
         ValidationResponse validationResponse = authResourceService.validationServiceByToken( token );
