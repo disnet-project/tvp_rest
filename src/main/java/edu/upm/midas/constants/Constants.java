@@ -18,7 +18,6 @@ public class Constants {
 
     public final static float SIMILARITY_MIN_VALUE = (float) 0.85;
 
-//    public final static String VALIDATION_FILE = "src/main/resources/findings/allFindings.fd";
     public final static String VALIDATION_FILE = "/findings/allFindings.fd";
 
     public final static String ERR_NO_PARAMETER = "No parameter was sent";
