@@ -25,7 +25,7 @@ import java.util.List;
  * @see
  */
 @RestController
-@RequestMapping("/tvp/api")
+@RequestMapping("${my.service.rest.request.mapping.general.url}" )
 public class ValidationController {
 
     @Autowired
@@ -33,9 +33,9 @@ public class ValidationController {
     @Autowired
     private TokenAuthorization tokenAuthorization;
 
-    @RequestMapping(path = { "/concepts-validated" }, //Term Validation Procedure
+    @RequestMapping(path = { "${my.service.rest.request.mapping.validate.path}" }, //Term Validation Procedure
             method = RequestMethod.POST)
-    public Response filter(@RequestBody @Valid Request request, HttpServletRequest httpRequest, Device device) throws Exception {
+    public Response validate(@RequestBody @Valid Request request, HttpServletRequest httpRequest, Device device) throws Exception {
         Response response = tokenAuthorization.validateService(request.getToken(), httpRequest.getServletPath(), httpRequest.getServletPath(), device);
         if (response.isAuthorization()) {
             List<MatchNLP> conceptsValidated = validationService.doValidation(request.getConcepts());
