@@ -25,7 +25,7 @@ import java.util.List;
  * @see
  */
 @RestController
-@RequestMapping("${my.service.rest.request.mapping.general.url}" )
+@RequestMapping("${my.service.rest.request.mapping.general.url}")
 public class ValidationController {
 
     @Autowired

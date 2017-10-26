@@ -1,4 +1,4 @@
-mvn clean package(function($){
+(function($){
   $(function(){
 
     $('.button-collapse').sideNav();
