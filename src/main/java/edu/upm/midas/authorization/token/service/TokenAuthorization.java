@@ -8,6 +8,7 @@ import edu.upm.midas.authorization.token.component.JwtTokenUtil;
 import edu.upm.midas.model.Concept;
 import edu.upm.midas.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mobile.device.Device;
 import org.springframework.stereotype.Service;
 
@@ -30,13 +31,18 @@ public class TokenAuthorization {
     @Autowired
     private AuthResourceService authResourceService;
 
+    @Value("${my.service.authorization.url}")
+    private String authorization_url;
+    @Value("${my.service.authorization.path}")
+    private String authorization_path;
+
 
     public Response validateService(String userToken, String request, String path, Device device){
         Response response = new Response();
 //        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String token = jwtTokenUtil.generateToken( userToken, request, path, device );
 
-        System.out.println( "Call Authorization API... " );
+        System.out.println( "Call Authorization API... (" + authorization_url + authorization_path + ")");
         ValidationResponse validationResponse = authResourceService.validationServiceByToken( token );
         response.setAuthorization( validationResponse.isAuthorized() );
         response.setAuthorizationMessage( validationResponse.getMessage() );
