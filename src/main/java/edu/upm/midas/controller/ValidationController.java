@@ -36,11 +36,19 @@ public class ValidationController {
     @RequestMapping(path = { "${my.service.rest.request.mapping.validate.path}" }, //Term Validation Procedure
             method = RequestMethod.POST)
     public Response validate(@RequestBody @Valid Request request, HttpServletRequest httpRequest, Device device) throws Exception {
-        Response response = tokenAuthorization.validateService(request.getToken(), httpRequest.getServletPath(), httpRequest.getServletPath(), device);
-        if (response.isAuthorized()) {
+        Response response = new Response();
+        //Response response = tokenAuthorization.validateService(request.getToken(), httpRequest.getServletPath(), httpRequest.getServletPath(), device);
+        //if (response.isAuthorized()) {
+        if (request.getConcepts().size() > 0) {
             List<MatchNLP> conceptsValidated = validationService.doValidation(request.getConcepts());
             response.setValidatedConcepts(conceptsValidated);
+            if (conceptsValidated.size() > 0){
+                response.setToken(request.getToken());
+                response.setAuthorized(true);
+                response.setAuthorizationMessage("Authorization out of use");
+            }
         }
+        //}
 
         return response;
     }

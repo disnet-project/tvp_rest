@@ -18,9 +18,9 @@ import java.util.List;
  */
 public class Request {
 
-    @Valid
+    /*@Valid
     @NotNull(message = Constants.ERR_NO_PARAMETER)
-    @NotEmpty(message = Constants.ERR_EMPTY_PARAMETER)
+    @NotEmpty(message = Constants.ERR_EMPTY_PARAMETER)*/
     private String token;
     @Valid
     @NotNull(message = Constants.ERR_NO_PARAMETER)

@@ -42,6 +42,7 @@ public class TokenAuthorization {
         response.setAuthorized( validationResponse.isAuthorized() );
         response.setAuthorizationMessage( validationResponse.getMessage() );
         response.setToken( userToken );
+        System.out.println(response.isAuthorized() + " | " + response.getAuthorizationMessage());
 
         return response;
 
