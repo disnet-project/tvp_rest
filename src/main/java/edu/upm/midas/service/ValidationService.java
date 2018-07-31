@@ -1,5 +1,6 @@
 package edu.upm.midas.service;
 
+import com.google.gson.Gson;
 import edu.upm.midas.constants.Constants;
 import edu.upm.midas.model.*;
 import edu.upm.midas.common.util.StaticUtils;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.AbstractStringMetric;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.Levenshtein;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +39,11 @@ public class ValidationService {
     public List<MatchNLP> doValidation(List<Concept> conceptList) throws Exception {//
         List<ValidationFinding> validationFindings = findingsManager.loadAllFindings( );
         List<MatchNLP> matchNLPList = new ArrayList<>();
+        int conceptCount = 1;int conceptListSize = conceptList.size();
         for (Concept concept: conceptList) {
+            System.out.println(conceptCount +". to " + conceptListSize + " => " + concept.getCui() + " | " + concept.getName());
             matchNLPList.add( validate(concept, validationFindings) );
+            conceptCount++;
         }
         return matchNLPList;
     }
@@ -198,6 +203,55 @@ public class ValidationService {
             }
         }
         return new BooleanAndString(false, "");
+    }
+
+    /**
+     * @param jsonBody
+     * @param snapshot
+     * @throws IOException
+     */
+    public void writeJSONFile(String jsonBody, String snapshot) throws IOException {
+        String fileName = snapshot + Constants.TVP_RETRIEVAL_FILE_NAME + Constants.DOT_JSON;
+        String path = Constants.TVP_RETRIEVAL_HISTORY_FOLDER + fileName;
+        InputStream in = getClass().getResourceAsStream(path);
+        //BufferedReader bL = new BufferedReader(new InputStreamReader(in));
+        File file = new File(path);
+        BufferedWriter bW;
+
+        if (!file.exists()){
+            bW = new BufferedWriter(new FileWriter(file));
+            bW.write(jsonBody);
+            bW.close();
+        }
+    }
+
+
+    /**
+     * @param snapshot
+     * @return
+     * @throws Exception
+     */
+    public Response readMetamapResponseJSON(String snapshot) throws Exception {
+        Response response = new Response();
+        System.out.println("Read JSON!...");
+        Gson gson = new Gson();
+        String fileName = snapshot + Constants.TVP_RETRIEVAL_FILE_NAME + Constants.DOT_JSON;
+        String path = Constants.TVP_RETRIEVAL_HISTORY_FOLDER + fileName;
+        System.out.println("Read JSON!..." + path);
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            response = gson.fromJson(br, Response.class);
+        }catch (Exception e){
+            System.out.println("Error to read or convert JSON!...");
+        }
+
+        /*for (edu.upm.midas.data.validation.metamap.model.response.Text text: resp.getTexts()) {
+            System.out.println("TextId: " + text.getId() + " | Concepts: " + text.getConcepts().toString());
+        }*/
+        //System.out.println("source: "+source);
+
+        return response;
     }
 
 

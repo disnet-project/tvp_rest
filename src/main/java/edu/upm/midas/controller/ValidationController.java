@@ -1,4 +1,6 @@
 package edu.upm.midas.controller;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import edu.upm.midas.authorization.token.service.TokenAuthorization;
 import edu.upm.midas.model.MatchNLP;
 import edu.upm.midas.model.Request;
@@ -37,18 +39,42 @@ public class ValidationController {
             method = RequestMethod.POST)
     public Response validate(@RequestBody @Valid Request request, HttpServletRequest httpRequest, Device device) throws Exception {
         Response response = new Response();
+        //System.out.println(httpRequest.getMethod());
         //Response response = tokenAuthorization.validateService(request.getToken(), httpRequest.getServletPath(), httpRequest.getServletPath(), device);
         //if (response.isAuthorized()) {
         if (request.getConcepts().size() > 0) {
             List<MatchNLP> conceptsValidated = validationService.doValidation(request.getConcepts());
             response.setValidatedConcepts(conceptsValidated);
             if (conceptsValidated.size() > 0){
+                System.out.println("OK");
                 response.setToken(request.getToken());
                 response.setAuthorized(true);
                 response.setAuthorizationMessage("Authorization out of use");
+                System.out.println("Saving json...");
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                validationService.writeJSONFile(gson.toJson(response), request.getSnapshot());
+                System.out.println("Saving json ready!...");
             }
         }
         //}
+
+        return response;
+    }
+
+    @RequestMapping(path = { "${my.service.rest.request.mapping.validate.test.path}" }, //Term Validation Procedure
+            method = RequestMethod.POST)
+    public Response validateTest(@RequestBody @Valid Request request, HttpServletRequest httpRequest, Device device) throws Exception {
+        Response response = new Response();
+        //System.out.println(httpRequest.getMethod());
+
+        System.out.println("TEST...");
+        System.out.println("Saving json...");
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        validationService.writeJSONFile(gson.toJson(response), request.getSnapshot() + "_TEST");
+        System.out.println("Saving json ready!...");
+        response.setToken(request.getToken());
+        response.setAuthorized(true);
+        response.setAuthorizationMessage("Authorization out of use");
 
         return response;
     }

@@ -23,4 +23,10 @@ public class Constants {
     public final static String ERR_NO_PARAMETER = "No parameter was sent";
     public final static String ERR_EMPTY_PARAMETER = "Empty parameter";
 
+    public static final String EXTRACTION_HISTORY_FOLDER = "tmp/tvp/";
+
+    public static final String TVP_RETRIEVAL_HISTORY_FOLDER = "tmp/tvp/";
+    public static final String TVP_RETRIEVAL_FILE_NAME = "_tvp_validation";
+    public static final String DOT_JSON = ".json";
+
 }
