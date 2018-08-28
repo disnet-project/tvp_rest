@@ -52,7 +52,7 @@ public class ValidationController {
                 response.setAuthorizationMessage("Authorization out of use");
                 System.out.println("Saving json...");
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                validationService.writeJSONFile(gson.toJson(response), request.getSnapshot());
+                validationService.writeJSONFile(gson.toJson(response), request);
                 System.out.println("Saving json ready!...");
             }
         }
@@ -70,7 +70,7 @@ public class ValidationController {
         System.out.println("TEST...");
         System.out.println("Saving json...");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        validationService.writeJSONFile(gson.toJson(response), request.getSnapshot() + "_TEST");
+        validationService.writeJSONFile(gson.toJson(response), request);
         System.out.println("Saving json ready!...");
         response.setToken(request.getToken());
         response.setAuthorized(true);

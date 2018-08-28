@@ -210,8 +210,8 @@ public class ValidationService {
      * @param snapshot
      * @throws IOException
      */
-    public void writeJSONFile(String jsonBody, String snapshot) throws IOException {
-        String fileName = snapshot + Constants.TVP_RETRIEVAL_FILE_NAME + Constants.DOT_JSON;
+    public void writeJSONFile(String jsonBody, Request request) throws IOException {
+        String fileName = request.getSnapshot() + Constants.UNDER_SCORE + request.getSource() + Constants.TVP_RETRIEVAL_FILE_NAME + Constants.DOT_JSON;
         String path = Constants.TVP_RETRIEVAL_HISTORY_FOLDER + fileName;
         InputStream in = getClass().getResourceAsStream(path);
         //BufferedReader bL = new BufferedReader(new InputStreamReader(in));

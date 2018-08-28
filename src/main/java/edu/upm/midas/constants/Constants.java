@@ -29,4 +29,9 @@ public class Constants {
     public static final String TVP_RETRIEVAL_FILE_NAME = "_tvp_validation";
     public static final String DOT_JSON = ".json";
 
+    /**
+     * Linea del piso
+     */
+    public static final String UNDER_SCORE = "_";
+
 }
